@@ -1,13 +1,17 @@
 const logger = require('../../connectors/logger');
 const Contact = require('./services/contact');
-const { contacts } = require('./routes');
+const { contacts, addContact, modifyContact, deleteContact, readContact } = require('./routes');
 
 const internals = {};
 
 internals.applyRoutes = (server, next) => {
 
   server.route([
-    contacts
+    contacts,
+    addContact,
+    modifyContact,
+    deleteContact,
+    readContact
   ]);
 
   next();
