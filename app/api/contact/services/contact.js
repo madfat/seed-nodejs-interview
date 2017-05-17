@@ -29,7 +29,6 @@ class Contact {
 
   deleteContact(index) {
     this.logger.info('call delete contact');
-
     contacts['contacts'].splice(index,1);
     return Promise.resolve("deleted");
   }

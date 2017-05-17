@@ -1,5 +1,5 @@
 // The route declaration
-export const contacts = {
+const contacts = [{
   method: 'GET',
   path: '/contacts',
   config: {
@@ -21,9 +21,8 @@ export const contacts = {
     const { server: { contact } } = req;
     reply(contact.getAll());
   }
-};
-
-export const addContact = {
+},
+ {
   method: 'POST',
   path: '/contacts',
   config: {
@@ -44,12 +43,10 @@ export const addContact = {
   handler(req, reply) {
     const {server: {contact}} = req;
     const newContact = {"name": req.payload.name, "tel": req.payload.tel};
-    contact.addContact(newContact);
-    reply(contact.getAll()).code(201);
+    reply(contact.addContact(newContact)).code(201);
   }
-};
-
-export const modifyContact = {
+},
+{
   method: 'PUT',
   path: '/contacts/{index}',
   config: {
@@ -70,12 +67,10 @@ export const modifyContact = {
   handler(req, reply) {
     const {server: {contact}} = req;
     const modifiedContact = {"name": req.payload.name, "tel": req.payload.tel};
-    contact.modifyContact(req.params.index-1, modifiedContact);
-    reply(contact.getAll()).code(200);
+    reply(contact.modifyContact(req.params.index-1, modifiedContact)).code(200);
   }
-}
-
-export const deleteContact = {
+},
+{
   method: 'DELETE',
   path: '/contacts/{index}',
   config: {
@@ -95,12 +90,10 @@ export const deleteContact = {
   },
   handler(req, reply) {
     const {server: {contact}} = req;
-    contact.deleteContact(req.params.index-1);
-    reply(contact.getAll()).code(204);
+    reply(contact.deleteContact(req.params.index-1)).code(204);
   }
-}
-
-export const readContact = {
+},
+{
   method: 'GET',
   path: '/contacts/{index}',
   config: {
@@ -123,3 +116,6 @@ export const readContact = {
     reply(contact.readContact(req.params.index-1));
   }
 }
+]
+
+module.exports = {contacts}
